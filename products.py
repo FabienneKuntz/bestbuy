@@ -45,4 +45,5 @@ class Product:
         if self.quantity <= 0:
             self.active = False
 
-        return f"Total price: {total_price:.2f} €, New quantity: {self.quantity}"
+        return float(total_price)
+        #return f"Total price: {total_price:.2f} €, New quantity: {self.quantity}"
