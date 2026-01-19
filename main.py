@@ -33,6 +33,7 @@ def main():
             print(f"Total of {total_quantity} items in store\n")
 
         elif user_input == "3":
+            shopping_list = []
             all_products = best_buy.get_all_products()
             counter = 1
             print("------")
@@ -44,8 +45,14 @@ def main():
             print("When you want to finish order, enter empty text.")
             while True:
                 product_input = input("Which product # do you want? ")
+
                 if product_input == "":
-                    print("Thank you for shopping with us!\n")
+                    if shopping_list:
+                        total_price = best_buy.order(shopping_list)
+                        print("********")
+                        print(f"Order made! Total payment: ${total_price:.2f}\n")
+                    else:
+                        print("No products bought.\n")
                     break
 
                 product_index = int(product_input) - 1
@@ -58,6 +65,7 @@ def main():
 
                 try:
                     product_list[product_index].buy(amount_input)
+                    shopping_list.append((all_products[product_index], amount_input))
                     print("Product added to list!\n")
                 except ValueError:
                     print("Quantity larger than what exists\n")
